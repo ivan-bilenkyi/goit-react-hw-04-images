@@ -11,7 +11,6 @@ export const App = () => {
   const [images, setImages] = useState([]);
   const [value, setValue] = useState('');
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(5);
   const [loadMore, setLoadMore] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -27,9 +26,9 @@ export const App = () => {
         setLoading(true);
         setError(false);
         setLoadMore(false);
-        const initialPhotos = await fetchPhotos(word, page, perPage);
+        const initialPhotos = await fetchPhotos(word, page);
         const { totalHits, hits } = initialPhotos;
-        const totalPage = Math.ceil(totalHits / perPage);
+        const totalPage = Math.ceil(totalHits / 12);
         setImages(prevImages => [...prevImages, ...hits]);
 
         if (totalPage > page) {
@@ -43,7 +42,7 @@ export const App = () => {
     };
 
     fetchPhoto();
-  }, [page, perPage, value]);
+  }, [page, perPage, value, error]);
 
   const handleSubmit = ({ value }) => {
     setImages([]);
