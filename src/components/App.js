@@ -42,7 +42,7 @@ export const App = () => {
     };
 
     fetchPhoto();
-  }, [page, perPage, value, error]);
+  }, [page, value, error]);
 
   const handleSubmit = ({ value }) => {
     setImages([]);
